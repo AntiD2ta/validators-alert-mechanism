@@ -5,11 +5,13 @@ compile:
 
 build-linux:
 	env GOOS=linux go build -o ./bin/ .
+	@make compress
 
 run:
 	./bin/validators-alert-mechanism
 
 compress:
-	cp ./bin/validators-alert-mechanism .
-	zip ./compressed/validators-alert-mechanism ./validators.json ./validators-alert-mechanism
-	rm ./validators-alert-mechanism
+	@rm ./compressed/validators-alert-mechanism.zip
+	@cp ./bin/validators-alert-mechanism .
+	@zip ./compressed/validators-alert-mechanism ./validators-alert-mechanism
+	@rm ./validators-alert-mechanism
