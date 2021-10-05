@@ -2,21 +2,27 @@ package init
 
 import (
 	"encoding/json"
-	"io/ioutil"
 	"os"
+	"strconv"
 
 	"github.com/AntiD2ta/validators-alert-mechanism/internal"
 )
 
 func Init() (config internal.Config, err error) {
-	pwd, _ := os.Getwd()
-	jsonFile, err := ioutil.ReadFile(pwd + "/validators.json")
+	rawJson := os.Getenv("VALIDATORS")
+	if rawJson == "" {
+		return
+	}
+	err = json.Unmarshal([]byte(rawJson), &config)
 	if err != nil {
 		return
 	}
-	err = json.Unmarshal(jsonFile, &config)
+
+	rawInterval := os.Getenv("INTERVAL")
+	interval, err := strconv.ParseInt(rawInterval, 10, 64)
 	if err != nil {
 		return
 	}
+	config.Interval = int(interval)
 	return
 }

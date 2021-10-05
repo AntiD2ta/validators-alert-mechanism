@@ -4,6 +4,5 @@
         {"name": "Nethermind 2", "address": "0xc42eb6dBDf8146ec574d631Dd29B65f314400910", "url": "https://blockscout.com/xdai/mainnet"},
         {"name": "Volta Testnet", "address": "0xcA87e042C28937F7AA48F150536E07CE00Dad313", "url": "https://volta-explorer.energyweb.org"},
         {"name": "Energy Web Chain", "address": "0x46d8BcDB927E20A56B33BBD0da75E32b540af9F9", "url": "https://explorer.energyweb.org"}
-    ],
-    "interval": 5
+    ]
 }
