@@ -3,7 +3,7 @@ package internal
 import (
 	"encoding/json"
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/http"
 	"time"
 )
@@ -16,14 +16,16 @@ func GetData(validator ValidatorData, interval int, data chan<- *Validator) {
 		data <- nil
 		return
 	}
+	defer rawResponse.Body.Close()
 
 	var response Response
-	jsonFile, err := ioutil.ReadAll(rawResponse.Body)
+	jsonFile, err := io.ReadAll(rawResponse.Body)
 	if err != nil {
 		fmt.Printf("%s\n", err)
 		data <- nil
 		return
 	}
+
 	err = json.Unmarshal(jsonFile, &response)
 	if err != nil {
 		fmt.Printf("%s\n", err)

@@ -3,7 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
-	"sort"
+	"slices"
 
 	initConfig "github.com/AntiD2ta/validators-alert-mechanism/init"
 	"github.com/AntiD2ta/validators-alert-mechanism/internal"
@@ -33,7 +33,7 @@ func HandleRequest(ctx context.Context, in interface{}) {
 		output = append(output, fmt.Sprintf("Validator %s has validated %d blocks in %d minutes", v.Name, v.MinedBlocks, config.Interval))
 	}
 
-	sort.Strings(output)
+	slices.Sort(output)
 	for _, o := range output {
 		fmt.Println(o)
 	}
